@@ -3934,8 +3934,8 @@ var getResultsTable = function (report) {
         var dependency = _a.dependency, drift = _a.drift, pulse = _a.pulse, releases = _a.releases, major = _a.major, minor = _a.minor, patch = _a.patch, available = _a.available;
         return ({
             dependency: dependency,
-            drift: drift.toFixed(2),
-            pulse: pulse.toFixed(2),
+            drift: (drift === null || drift === void 0 ? void 0 : drift.toFixed(2)) || drift,
+            pulse: (pulse === null || pulse === void 0 ? void 0 : pulse.toFixed(2)) || pulse,
             releases: releases,
             major: major,
             minor: minor,

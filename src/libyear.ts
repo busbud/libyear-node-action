@@ -57,8 +57,8 @@ export const getResultsTable = (report: Dependencies) =>
       available,
     }) => ({
       dependency,
-      drift: drift.toFixed(2),
-      pulse: pulse.toFixed(2),
+      drift: drift?.toFixed(2) || drift,
+      pulse: pulse?.toFixed(2) || pulse,
       releases,
       major,
       minor,
