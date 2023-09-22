@@ -1,0 +1,13 @@
+diff --git a/node_modules/libyear/src/dependencies.js b/node_modules/libyear/src/dependencies.js
+index 22045dd..58d7664 100644
+--- a/node_modules/libyear/src/dependencies.js
++++ b/node_modules/libyear/src/dependencies.js
+@@ -44,7 +44,7 @@ const getDependencies = async (packageManager, flags) => {
+         return [
+             dependency,
+             (_a = data.version) !== null && _a !== void 0 ? _a : (((_b = data.required) === null || _b === void 0 ? void 0 : _b.version) ||
+-                data.required).replace(/[<=>^~]+/u, ""),
++                data.required || "").replace(/[<=>^~]+/u, ""),
+         ];
+     })
+         .filter(([_, version]) => (0, semver_1.valid)(version)));

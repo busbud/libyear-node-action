@@ -1,646 +1,10 @@
-module.exports =
-/******/ (function(modules, runtime) { // webpackBootstrap
+/******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	__webpack_require__.ab = __dirname + "/";
-/******/
-/******/ 	// the startup function
-/******/ 	function startup() {
-/******/ 		// Load entry module and return exports
-/******/ 		return __webpack_require__(81);
-/******/ 	};
-/******/
-/******/ 	// run startup
-/******/ 	return startup();
-/******/ })
-/************************************************************************/
-/******/ ({
+/******/ 	var __webpack_modules__ = ({
 
-/***/ 5:
-/***/ (function(__unusedmodule, exports, __webpack_require__) {
+/***/ 751:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
-"use strict";
-
-/**
- * ```ts
- * interface Separated<E, A> {
- *    readonly left: E
- *    readonly right: A
- * }
- * ```
- *
- * Represents a result of separating a whole into two parts.
- *
- * @since 2.10.0
- */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.right = exports.left = exports.flap = exports.Functor = exports.Bifunctor = exports.URI = exports.bimap = exports.mapLeft = exports.map = exports.separated = void 0;
-var function_1 = __webpack_require__(231);
-var Functor_1 = __webpack_require__(943);
-// -------------------------------------------------------------------------------------
-// constructors
-// -------------------------------------------------------------------------------------
-/**
- * @category constructors
- * @since 2.10.0
- */
-var separated = function (left, right) { return ({ left: left, right: right }); };
-exports.separated = separated;
-// -------------------------------------------------------------------------------------
-// non-pipeables
-// -------------------------------------------------------------------------------------
-var _map = function (fa, f) { return function_1.pipe(fa, exports.map(f)); };
-var _mapLeft = function (fa, f) { return function_1.pipe(fa, exports.mapLeft(f)); };
-var _bimap = function (fa, g, f) { return function_1.pipe(fa, exports.bimap(g, f)); };
-// -------------------------------------------------------------------------------------
-// type class members
-// -------------------------------------------------------------------------------------
-/**
- * `map` can be used to turn functions `(a: A) => B` into functions `(fa: F<A>) => F<B>` whose argument and return types
- * use the type constructor `F` to represent some computational context.
- *
- * @category Functor
- * @since 2.10.0
- */
-var map = function (f) { return function (fa) {
-    return exports.separated(exports.left(fa), f(exports.right(fa)));
-}; };
-exports.map = map;
-/**
- * Map a function over the first type argument of a bifunctor.
- *
- * @category Bifunctor
- * @since 2.10.0
- */
-var mapLeft = function (f) { return function (fa) {
-    return exports.separated(f(exports.left(fa)), exports.right(fa));
-}; };
-exports.mapLeft = mapLeft;
-/**
- * Map a pair of functions over the two type arguments of the bifunctor.
- *
- * @category Bifunctor
- * @since 2.10.0
- */
-var bimap = function (f, g) { return function (fa) {
-    return exports.separated(f(exports.left(fa)), g(exports.right(fa)));
-}; };
-exports.bimap = bimap;
-// -------------------------------------------------------------------------------------
-// instances
-// -------------------------------------------------------------------------------------
-/**
- * @category instances
- * @since 2.10.0
- */
-exports.URI = 'Separated';
-/**
- * @category instances
- * @since 2.10.0
- */
-exports.Bifunctor = {
-    URI: exports.URI,
-    mapLeft: _mapLeft,
-    bimap: _bimap
-};
-/**
- * @category instances
- * @since 2.10.0
- */
-exports.Functor = {
-    URI: exports.URI,
-    map: _map
-};
-/**
- * Derivable from `Functor`.
- *
- * @category combinators
- * @since 2.10.0
- */
-exports.flap = 
-/*#_PURE_*/
-Functor_1.flap(exports.Functor);
-// -------------------------------------------------------------------------------------
-// utils
-// -------------------------------------------------------------------------------------
-/**
- * @since 2.10.0
- */
-var left = function (s) { return s.left; };
-exports.left = left;
-/**
- * @since 2.10.0
- */
-var right = function (s) { return s.right; };
-exports.right = right;
-
-
-/***/ }),
-
-/***/ 81:
-/***/ (function(__unusedmodule, exports, __webpack_require__) {
-
-"use strict";
-
-/* istanbul ignore file - this file is used purely as an entry-point */
-Object.defineProperty(exports, "__esModule", { value: true });
-var _1 = __webpack_require__(593);
-_1.main({
-    env: process.env,
-    log: console,
-    cwd: process.cwd(),
-}).catch(function (err) {
-    console.error(err);
-    process.exit(1);
-});
-
-
-/***/ }),
-
-/***/ 99:
-/***/ (function(__unusedmodule, exports) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.tailRec = void 0;
-/**
- * @since 2.0.0
- */
-var tailRec = function (startWith, f) {
-    var ab = f(startWith);
-    while (ab._tag === 'Left') {
-        ab = f(ab.left);
-    }
-    return ab.right;
-};
-exports.tailRec = tailRec;
-
-
-/***/ }),
-
-/***/ 129:
-/***/ (function(module) {
-
-module.exports = require("child_process");
-
-/***/ }),
-
-/***/ 231:
-/***/ (function(__unusedmodule, exports) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.hole = exports.pipe = exports.untupled = exports.tupled = exports.absurd = exports.decrement = exports.increment = exports.tuple = exports.flow = exports.flip = exports.constVoid = exports.constUndefined = exports.constNull = exports.constFalse = exports.constTrue = exports.constant = exports.not = exports.unsafeCoerce = exports.identity = exports.getEndomorphismMonoid = exports.getRing = exports.getSemiring = exports.getMonoid = exports.getSemigroup = exports.getBooleanAlgebra = void 0;
-// -------------------------------------------------------------------------------------
-// instances
-// -------------------------------------------------------------------------------------
-/**
- * @category instances
- * @since 2.10.0
- */
-var getBooleanAlgebra = function (B) { return function () { return ({
-    meet: function (x, y) { return function (a) { return B.meet(x(a), y(a)); }; },
-    join: function (x, y) { return function (a) { return B.join(x(a), y(a)); }; },
-    zero: function () { return B.zero; },
-    one: function () { return B.one; },
-    implies: function (x, y) { return function (a) { return B.implies(x(a), y(a)); }; },
-    not: function (x) { return function (a) { return B.not(x(a)); }; }
-}); }; };
-exports.getBooleanAlgebra = getBooleanAlgebra;
-/**
- * Unary functions form a semigroup as long as you can provide a semigroup for the codomain.
- *
- * @example
- * import { Predicate, getSemigroup } from 'fp-ts/function'
- * import * as B from 'fp-ts/boolean'
- *
- * const f: Predicate<number> = (n) => n <= 2
- * const g: Predicate<number> = (n) => n >= 0
- *
- * const S1 = getSemigroup(B.SemigroupAll)<number>()
- *
- * assert.deepStrictEqual(S1.concat(f, g)(1), true)
- * assert.deepStrictEqual(S1.concat(f, g)(3), false)
- *
- * const S2 = getSemigroup(B.SemigroupAny)<number>()
- *
- * assert.deepStrictEqual(S2.concat(f, g)(1), true)
- * assert.deepStrictEqual(S2.concat(f, g)(3), true)
- *
- * @category instances
- * @since 2.10.0
- */
-var getSemigroup = function (S) { return function () { return ({
-    concat: function (f, g) { return function (a) { return S.concat(f(a), g(a)); }; }
-}); }; };
-exports.getSemigroup = getSemigroup;
-/**
- * Unary functions form a monoid as long as you can provide a monoid for the codomain.
- *
- * @example
- * import { Predicate, getMonoid } from 'fp-ts/function'
- * import * as B from 'fp-ts/boolean'
- *
- * const f: Predicate<number> = (n) => n <= 2
- * const g: Predicate<number> = (n) => n >= 0
- *
- * const M1 = getMonoid(B.MonoidAll)<number>()
- *
- * assert.deepStrictEqual(M1.concat(f, g)(1), true)
- * assert.deepStrictEqual(M1.concat(f, g)(3), false)
- *
- * const M2 = getMonoid(B.MonoidAny)<number>()
- *
- * assert.deepStrictEqual(M2.concat(f, g)(1), true)
- * assert.deepStrictEqual(M2.concat(f, g)(3), true)
- *
- * @category instances
- * @since 2.10.0
- */
-var getMonoid = function (M) {
-    var getSemigroupM = exports.getSemigroup(M);
-    return function () { return ({
-        concat: getSemigroupM().concat,
-        empty: function () { return M.empty; }
-    }); };
-};
-exports.getMonoid = getMonoid;
-/**
- * @category instances
- * @since 2.10.0
- */
-var getSemiring = function (S) { return ({
-    add: function (f, g) { return function (x) { return S.add(f(x), g(x)); }; },
-    zero: function () { return S.zero; },
-    mul: function (f, g) { return function (x) { return S.mul(f(x), g(x)); }; },
-    one: function () { return S.one; }
-}); };
-exports.getSemiring = getSemiring;
-/**
- * @category instances
- * @since 2.10.0
- */
-var getRing = function (R) {
-    var S = exports.getSemiring(R);
-    return {
-        add: S.add,
-        mul: S.mul,
-        one: S.one,
-        zero: S.zero,
-        sub: function (f, g) { return function (x) { return R.sub(f(x), g(x)); }; }
-    };
-};
-exports.getRing = getRing;
-/**
- * Endomorphism form a monoid where the `empty` value is the identity function.
- *
- * @category instances
- * @since 2.10.0
- */
-var getEndomorphismMonoid = function () { return ({
-    concat: function (x, y) { return function (a) { return y(x(a)); }; },
-    empty: identity
-}); };
-exports.getEndomorphismMonoid = getEndomorphismMonoid;
-/**
- * @since 2.0.0
- */
-function identity(a) {
-    return a;
-}
-exports.identity = identity;
-/**
- * @since 2.0.0
- */
-exports.unsafeCoerce = identity;
-/**
- * @since 2.0.0
- */
-function not(predicate) {
-    return function (a) { return !predicate(a); };
-}
-exports.not = not;
-/**
- * @since 2.0.0
- */
-function constant(a) {
-    return function () { return a; };
-}
-exports.constant = constant;
-/**
- * A thunk that returns always `true`.
- *
- * @since 2.0.0
- */
-exports.constTrue = 
-/*#__PURE__*/
-constant(true);
-/**
- * A thunk that returns always `false`.
- *
- * @since 2.0.0
- */
-exports.constFalse = 
-/*#__PURE__*/
-constant(false);
-/**
- * A thunk that returns always `null`.
- *
- * @since 2.0.0
- */
-exports.constNull = 
-/*#__PURE__*/
-constant(null);
-/**
- * A thunk that returns always `undefined`.
- *
- * @since 2.0.0
- */
-exports.constUndefined = 
-/*#__PURE__*/
-constant(undefined);
-/**
- * A thunk that returns always `void`.
- *
- * @since 2.0.0
- */
-exports.constVoid = exports.constUndefined;
-/**
- * Flips the order of the arguments of a function of two arguments.
- *
- * @since 2.0.0
- */
-function flip(f) {
-    return function (b, a) { return f(a, b); };
-}
-exports.flip = flip;
-function flow(ab, bc, cd, de, ef, fg, gh, hi, ij) {
-    switch (arguments.length) {
-        case 1:
-            return ab;
-        case 2:
-            return function () {
-                return bc(ab.apply(this, arguments));
-            };
-        case 3:
-            return function () {
-                return cd(bc(ab.apply(this, arguments)));
-            };
-        case 4:
-            return function () {
-                return de(cd(bc(ab.apply(this, arguments))));
-            };
-        case 5:
-            return function () {
-                return ef(de(cd(bc(ab.apply(this, arguments)))));
-            };
-        case 6:
-            return function () {
-                return fg(ef(de(cd(bc(ab.apply(this, arguments))))));
-            };
-        case 7:
-            return function () {
-                return gh(fg(ef(de(cd(bc(ab.apply(this, arguments)))))));
-            };
-        case 8:
-            return function () {
-                return hi(gh(fg(ef(de(cd(bc(ab.apply(this, arguments))))))));
-            };
-        case 9:
-            return function () {
-                return ij(hi(gh(fg(ef(de(cd(bc(ab.apply(this, arguments)))))))));
-            };
-    }
-    return;
-}
-exports.flow = flow;
-/**
- * @since 2.0.0
- */
-function tuple() {
-    var t = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        t[_i] = arguments[_i];
-    }
-    return t;
-}
-exports.tuple = tuple;
-/**
- * @since 2.0.0
- */
-function increment(n) {
-    return n + 1;
-}
-exports.increment = increment;
-/**
- * @since 2.0.0
- */
-function decrement(n) {
-    return n - 1;
-}
-exports.decrement = decrement;
-/**
- * @since 2.0.0
- */
-function absurd(_) {
-    throw new Error('Called `absurd` function which should be uncallable');
-}
-exports.absurd = absurd;
-/**
- * Creates a tupled version of this function: instead of `n` arguments, it accepts a single tuple argument.
- *
- * @example
- * import { tupled } from 'fp-ts/function'
- *
- * const add = tupled((x: number, y: number): number => x + y)
- *
- * assert.strictEqual(add([1, 2]), 3)
- *
- * @since 2.4.0
- */
-function tupled(f) {
-    return function (a) { return f.apply(void 0, a); };
-}
-exports.tupled = tupled;
-/**
- * Inverse function of `tupled`
- *
- * @since 2.4.0
- */
-function untupled(f) {
-    return function () {
-        var a = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            a[_i] = arguments[_i];
-        }
-        return f(a);
-    };
-}
-exports.untupled = untupled;
-function pipe(a, ab, bc, cd, de, ef, fg, gh, hi, ij, jk, kl, lm, mn, no, op, pq, qr, rs, st) {
-    switch (arguments.length) {
-        case 1:
-            return a;
-        case 2:
-            return ab(a);
-        case 3:
-            return bc(ab(a));
-        case 4:
-            return cd(bc(ab(a)));
-        case 5:
-            return de(cd(bc(ab(a))));
-        case 6:
-            return ef(de(cd(bc(ab(a)))));
-        case 7:
-            return fg(ef(de(cd(bc(ab(a))))));
-        case 8:
-            return gh(fg(ef(de(cd(bc(ab(a)))))));
-        case 9:
-            return hi(gh(fg(ef(de(cd(bc(ab(a))))))));
-        case 10:
-            return ij(hi(gh(fg(ef(de(cd(bc(ab(a)))))))));
-        case 11:
-            return jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a))))))))));
-        case 12:
-            return kl(jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a)))))))))));
-        case 13:
-            return lm(kl(jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a))))))))))));
-        case 14:
-            return mn(lm(kl(jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a)))))))))))));
-        case 15:
-            return no(mn(lm(kl(jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a))))))))))))));
-        case 16:
-            return op(no(mn(lm(kl(jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a)))))))))))))));
-        case 17:
-            return pq(op(no(mn(lm(kl(jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a))))))))))))))));
-        case 18:
-            return qr(pq(op(no(mn(lm(kl(jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a)))))))))))))))));
-        case 19:
-            return rs(qr(pq(op(no(mn(lm(kl(jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a))))))))))))))))));
-        case 20:
-            return st(rs(qr(pq(op(no(mn(lm(kl(jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a)))))))))))))))))));
-    }
-    return;
-}
-exports.pipe = pipe;
-/**
- * Type hole simulation
- *
- * @since 2.7.0
- */
-exports.hole = absurd;
-
-
-/***/ }),
-
-/***/ 286:
-/***/ (function(__unusedmodule, exports) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.metrics = void 0;
-exports.metrics = [
-    "drift",
-    "pulse",
-    "releases",
-    "major",
-    "minor",
-    "patch",
-];
-
-
-/***/ }),
-
-/***/ 306:
-/***/ (function(__unusedmodule, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.PathReporter = exports.success = exports.failure = void 0;
-var _1 = __webpack_require__(338);
-var Either_1 = __webpack_require__(311);
-function stringify(v) {
-    if (typeof v === 'function') {
-        return _1.getFunctionName(v);
-    }
-    if (typeof v === 'number' && !isFinite(v)) {
-        if (isNaN(v)) {
-            return 'NaN';
-        }
-        return v > 0 ? 'Infinity' : '-Infinity';
-    }
-    return JSON.stringify(v);
-}
-function getContextPath(context) {
-    return context.map(function (_a) {
-        var key = _a.key, type = _a.type;
-        return key + ": " + type.name;
-    }).join('/');
-}
-function getMessage(e) {
-    return e.message !== undefined
-        ? e.message
-        : "Invalid value " + stringify(e.value) + " supplied to " + getContextPath(e.context);
-}
-/**
- * @since 1.0.0
- */
-function failure(es) {
-    return es.map(getMessage);
-}
-exports.failure = failure;
-/**
- * @since 1.0.0
- */
-function success() {
-    return ['No errors!'];
-}
-exports.success = success;
-/**
- * @since 1.0.0
- */
-exports.PathReporter = {
-    report: Either_1.fold(failure, success)
-};
-
-
-/***/ }),
-
-/***/ 311:
-/***/ (function(__unusedmodule, exports, __webpack_require__) {
-
-"use strict";
 
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -661,17 +25,579 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-Object.defineProperty(exports, "__esModule", { value: true });
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ENVIRONMENT = void 0;
+var t = __importStar(__nccwpck_require__(428));
+exports.ENVIRONMENT = t.intersection([
+    t.type({
+        /** Implicit environment variable passed by GitHub */
+        GITHUB_EVENT_PATH: t.string,
+        GITHUB_EVENT_NAME: t.string,
+    }),
+    t.partial({
+        /**
+         * Folder within the repository to run libyear on
+         */
+        FOLDER: t.string,
+    }),
+]);
+
+
+/***/ }),
+
+/***/ 726:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.main = exports.runAction = void 0;
+var PathReporter_1 = __nccwpck_require__(985);
+var Either_1 = __nccwpck_require__(534);
+var fs_1 = __nccwpck_require__(147);
+var path = __importStar(__nccwpck_require__(17));
+var environment_1 = __nccwpck_require__(751);
+var libyear_1 = __nccwpck_require__(286);
+var runAction = function (_a) {
+    var env = _a.env, log = _a.log, cwd = _a.cwd;
+    return __awaiter(void 0, void 0, void 0, function () {
+        var json, error, dir, report, totals, _i, metrics_1, metric, val, output;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0: return [4 /*yield*/, fs_1.promises.readFile(env.GITHUB_EVENT_PATH)];
+                case 1:
+                    json = _b.sent();
+                    error = function (msg) {
+                        log.error("::error ::" + msg);
+                        return new Error(msg);
+                    };
+                    if (!(env.GITHUB_EVENT_NAME === 'push' ||
+                        env.GITHUB_EVENT_NAME === 'schedule')) return [3 /*break*/, 3];
+                    dir = env.FOLDER ? path.join(cwd, env.FOLDER) : cwd;
+                    return [4 /*yield*/, libyear_1.runLibyear(dir)];
+                case 2:
+                    report = _b.sent();
+                    log.log('Result: ');
+                    log.table(libyear_1.getResultsTable(report));
+                    // calculate totals
+                    log.log('Totals: ');
+                    totals = libyear_1.getTotals(report);
+                    for (_i = 0, metrics_1 = libyear_1.metrics; _i < metrics_1.length; _i++) {
+                        metric = metrics_1[_i];
+                        val = totals.get(metric);
+                        log.log(metric + ": " + val);
+                        output = metric === 'drift' || metric === 'pulse' ? Number(val).toFixed(2) : val;
+                        log.log("::set-output name=" + metric + "::" + output);
+                    }
+                    return [3 /*break*/, 4];
+                case 3:
+                    if (env.GITHUB_EVENT_NAME === 'pull_request') {
+                        throw new Error('TODO');
+                    }
+                    else {
+                        throw error("Unsupported GitHub event: " + env.GITHUB_EVENT_NAME);
+                    }
+                    _b.label = 4;
+                case 4: return [2 /*return*/];
+            }
+        });
+    });
+};
+exports.runAction = runAction;
+var main = function (_a) {
+    var env = _a.env, log = _a.log, cwd = _a.cwd;
+    return __awaiter(void 0, void 0, void 0, function () {
+        var validate, errors, _i, errors_1, error;
+        return __generator(this, function (_b) {
+            validate = environment_1.ENVIRONMENT.decode(env);
+            if (Either_1.isRight(validate)) {
+                return [2 /*return*/, exports.runAction({
+                        env: validate.right,
+                        log: log,
+                        cwd: cwd,
+                    })];
+            }
+            else {
+                errors = PathReporter_1.PathReporter.report(validate);
+                for (_i = 0, errors_1 = errors; _i < errors_1.length; _i++) {
+                    error = errors_1[_i];
+                    log.error(error);
+                }
+                throw new Error('Invalid config, unable to continue');
+            }
+            return [2 /*return*/];
+        });
+    });
+};
+exports.main = main;
+
+
+/***/ }),
+
+/***/ 286:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getResultsTable = exports.runLibyear = exports.setLibyearPath = exports.getTotals = exports.metrics = void 0;
+var child_process = __importStar(__nccwpck_require__(81));
+var constants_1 = __nccwpck_require__(764);
+Object.defineProperty(exports, "metrics", ({ enumerable: true, get: function () { return constants_1.metrics; } }));
+var validate_1 = __nccwpck_require__(190);
+Object.defineProperty(exports, "getTotals", ({ enumerable: true, get: function () { return validate_1.getTotals; } }));
+var path = __importStar(__nccwpck_require__(17));
+var util_1 = __nccwpck_require__(837);
+var exec = util_1.promisify(child_process.exec);
+var libyearPath = null;
+/**
+ * Used for testing to overwrite the path to point to node_modules
+ */
+var setLibyearPath = function (path) {
+    libyearPath = path;
+};
+exports.setLibyearPath = setLibyearPath;
+/**
+ * Dynamically get the path to the libyear module
+ *
+ * (supporting both live (built) and test environments)
+ */
+var getLibyearModulePath = function () {
+    /* istanbul ignore else */
+    if (libyearPath) {
+        return libyearPath;
+    }
+    else {
+        /**
+         * When run on GitHub, the compiles libyear module is in the file
+         * ../libyear/index.js relative to the action module in dist/main/index.js
+         */
+        return path.join(path.dirname(__dirname), 'libyear');
+    }
+};
+var runLibyear = function (directory) { return __awaiter(void 0, void 0, void 0, function () {
+    var path, result, report;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                path = getLibyearModulePath();
+                return [4 /*yield*/, exec("node \"" + path + "\" --json", {
+                        cwd: directory,
+                    })];
+            case 1:
+                result = _a.sent();
+                report = JSON.parse(result.stdout);
+                return [2 /*return*/, report];
+        }
+    });
+}); };
+exports.runLibyear = runLibyear;
+var getResultsTable = function (report) {
+    return report.map(function (_a) {
+        var dependency = _a.dependency, drift = _a.drift, pulse = _a.pulse, releases = _a.releases, major = _a.major, minor = _a.minor, patch = _a.patch, available = _a.available;
+        return ({
+            dependency: dependency,
+            drift: (drift === null || drift === void 0 ? void 0 : drift.toFixed(2)) || drift,
+            pulse: (pulse === null || pulse === void 0 ? void 0 : pulse.toFixed(2)) || pulse,
+            releases: releases,
+            major: major,
+            minor: minor,
+            patch: patch,
+            available: available,
+        });
+    });
+};
+exports.getResultsTable = getResultsTable;
+
+
+/***/ }),
+
+/***/ 766:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getApplicativeComposition = exports.getApplicativeMonoid = void 0;
+/**
+ * The `Applicative` type class extends the `Apply` type class with a `of` function, which can be used to create values
+ * of type `f a` from values of type `a`.
+ *
+ * Where `Apply` provides the ability to lift functions of two or more arguments to functions whose arguments are
+ * wrapped using `f`, and `Functor` provides the ability to lift functions of one argument, `pure` can be seen as the
+ * function which lifts functions of _zero_ arguments. That is, `Applicative` functors support a lifting operation for
+ * any number of function arguments.
+ *
+ * Instances must satisfy the following laws in addition to the `Apply` laws:
+ *
+ * 1. Identity: `A.ap(A.of(a => a), fa) <-> fa`
+ * 2. Homomorphism: `A.ap(A.of(ab), A.of(a)) <-> A.of(ab(a))`
+ * 3. Interchange: `A.ap(fab, A.of(a)) <-> A.ap(A.of(ab => ab(a)), fab)`
+ *
+ * Note. `Functor`'s `map` can be derived: `A.map(x, f) = A.ap(A.of(f), x)`
+ *
+ * @since 2.0.0
+ */
+var Apply_1 = __nccwpck_require__(205);
+var function_1 = __nccwpck_require__(716);
+var Functor_1 = __nccwpck_require__(533);
+function getApplicativeMonoid(F) {
+    var f = Apply_1.getApplySemigroup(F);
+    return function (M) { return ({
+        concat: f(M).concat,
+        empty: F.of(M.empty)
+    }); };
+}
+exports.getApplicativeMonoid = getApplicativeMonoid;
+/** @deprecated */
+function getApplicativeComposition(F, G) {
+    var map = Functor_1.getFunctorComposition(F, G).map;
+    var _ap = Apply_1.ap(F, G);
+    return {
+        map: map,
+        of: function (a) { return F.of(G.of(a)); },
+        ap: function (fgab, fga) { return function_1.pipe(fgab, _ap(fga)); }
+    };
+}
+exports.getApplicativeComposition = getApplicativeComposition;
+
+
+/***/ }),
+
+/***/ 205:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.sequenceS = exports.sequenceT = exports.getApplySemigroup = exports.apS = exports.apSecond = exports.apFirst = exports.ap = void 0;
+var function_1 = __nccwpck_require__(716);
+function ap(F, G) {
+    return function (fa) { return function (fab) {
+        return F.ap(F.map(fab, function (gab) { return function (ga) { return G.ap(gab, ga); }; }), fa);
+    }; };
+}
+exports.ap = ap;
+function apFirst(A) {
+    return function (second) { return function (first) {
+        return A.ap(A.map(first, function (a) { return function () { return a; }; }), second);
+    }; };
+}
+exports.apFirst = apFirst;
+function apSecond(A) {
+    return function (second) { return function (first) {
+        return A.ap(A.map(first, function () { return function (b) { return b; }; }), second);
+    }; };
+}
+exports.apSecond = apSecond;
+function apS(F) {
+    return function (name, fb) { return function (fa) {
+        return F.ap(F.map(fa, function (a) { return function (b) {
+            var _a;
+            return Object.assign({}, a, (_a = {}, _a[name] = b, _a));
+        }; }), fb);
+    }; };
+}
+exports.apS = apS;
+function getApplySemigroup(F) {
+    return function (S) { return ({
+        concat: function (first, second) {
+            return F.ap(F.map(first, function (x) { return function (y) { return S.concat(x, y); }; }), second);
+        }
+    }); };
+}
+exports.getApplySemigroup = getApplySemigroup;
+function curried(f, n, acc) {
+    return function (x) {
+        var combined = Array(acc.length + 1);
+        for (var i = 0; i < acc.length; i++) {
+            combined[i] = acc[i];
+        }
+        combined[acc.length] = x;
+        return n === 0 ? f.apply(null, combined) : curried(f, n - 1, combined);
+    };
+}
+var tupleConstructors = {
+    1: function (a) { return [a]; },
+    2: function (a) { return function (b) { return [a, b]; }; },
+    3: function (a) { return function (b) { return function (c) { return [a, b, c]; }; }; },
+    4: function (a) { return function (b) { return function (c) { return function (d) { return [a, b, c, d]; }; }; }; },
+    5: function (a) { return function (b) { return function (c) { return function (d) { return function (e) { return [a, b, c, d, e]; }; }; }; }; }
+};
+function getTupleConstructor(len) {
+    if (!tupleConstructors.hasOwnProperty(len)) {
+        tupleConstructors[len] = curried(function_1.tuple, len - 1, []);
+    }
+    return tupleConstructors[len];
+}
+function sequenceT(F) {
+    return function () {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i] = arguments[_i];
+        }
+        var len = args.length;
+        var f = getTupleConstructor(len);
+        var fas = F.map(args[0], f);
+        for (var i = 1; i < len; i++) {
+            fas = F.ap(fas, args[i]);
+        }
+        return fas;
+    };
+}
+exports.sequenceT = sequenceT;
+function getRecordConstructor(keys) {
+    var len = keys.length;
+    switch (len) {
+        case 1:
+            return function (a) {
+                var _a;
+                return (_a = {}, _a[keys[0]] = a, _a);
+            };
+        case 2:
+            return function (a) { return function (b) {
+                var _a;
+                return (_a = {}, _a[keys[0]] = a, _a[keys[1]] = b, _a);
+            }; };
+        case 3:
+            return function (a) { return function (b) { return function (c) {
+                var _a;
+                return (_a = {}, _a[keys[0]] = a, _a[keys[1]] = b, _a[keys[2]] = c, _a);
+            }; }; };
+        case 4:
+            return function (a) { return function (b) { return function (c) { return function (d) {
+                var _a;
+                return (_a = {},
+                    _a[keys[0]] = a,
+                    _a[keys[1]] = b,
+                    _a[keys[2]] = c,
+                    _a[keys[3]] = d,
+                    _a);
+            }; }; }; };
+        case 5:
+            return function (a) { return function (b) { return function (c) { return function (d) { return function (e) {
+                var _a;
+                return (_a = {},
+                    _a[keys[0]] = a,
+                    _a[keys[1]] = b,
+                    _a[keys[2]] = c,
+                    _a[keys[3]] = d,
+                    _a[keys[4]] = e,
+                    _a);
+            }; }; }; }; };
+        default:
+            return curried(function () {
+                var args = [];
+                for (var _i = 0; _i < arguments.length; _i++) {
+                    args[_i] = arguments[_i];
+                }
+                var r = {};
+                for (var i = 0; i < len; i++) {
+                    r[keys[i]] = args[i];
+                }
+                return r;
+            }, len - 1, []);
+    }
+}
+function sequenceS(F) {
+    return function (r) {
+        var keys = Object.keys(r);
+        var len = keys.length;
+        var f = getRecordConstructor(keys);
+        var fr = F.map(r[keys[0]], f);
+        for (var i = 1; i < len; i++) {
+            fr = F.ap(fr, r[keys[i]]);
+        }
+        return fr;
+    };
+}
+exports.sequenceS = sequenceS;
+
+
+/***/ }),
+
+/***/ 372:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.bind = exports.chainFirst = void 0;
+function chainFirst(M) {
+    return function (f) { return function (first) { return M.chain(first, function (a) { return M.map(f(a), function () { return a; }); }); }; };
+}
+exports.chainFirst = chainFirst;
+function bind(M) {
+    return function (name, f) { return function (ma) { return M.chain(ma, function (a) { return M.map(f(a), function (b) {
+        var _a;
+        return Object.assign({}, a, (_a = {}, _a[name] = b, _a));
+    }); }); }; };
+}
+exports.bind = bind;
+
+
+/***/ }),
+
+/***/ 322:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.tailRec = void 0;
+/**
+ * @since 2.0.0
+ */
+var tailRec = function (startWith, f) {
+    var ab = f(startWith);
+    while (ab._tag === 'Left') {
+        ab = f(ab.left);
+    }
+    return ab.right;
+};
+exports.tailRec = tailRec;
+
+
+/***/ }),
+
+/***/ 534:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getFilterable = exports.getCompactable = exports.getSemigroup = exports.getEq = exports.getShow = exports.URI = exports.throwError = exports.sequence = exports.traverse = exports.reduceRight = exports.foldMap = exports.reduce = exports.duplicate = exports.extend = exports.alt = exports.altW = exports.flatten = exports.chain = exports.chainW = exports.of = exports.ap = exports.apW = exports.mapLeft = exports.bimap = exports.map = exports.filterOrElse = exports.filterOrElseW = exports.orElse = exports.orElseW = exports.swap = exports.chainOptionK = exports.fromOptionK = exports.toUnion = exports.chainNullableK = exports.fromNullableK = exports.tryCatchK = exports.tryCatch = exports.fromNullable = exports.getOrElse = exports.getOrElseW = exports.fold = exports.match = exports.foldW = exports.matchW = exports.fromPredicate = exports.fromOption = exports.right = exports.left = exports.isRight = exports.isLeft = void 0;
 exports.getValidation = exports.getValidationMonoid = exports.getValidationSemigroup = exports.getApplyMonoid = exports.getApplySemigroup = exports.either = exports.stringifyJSON = exports.parseJSON = exports.sequenceArray = exports.traverseArray = exports.traverseArrayWithIndex = exports.apSW = exports.apS = exports.bindW = exports.bind = exports.bindTo = exports.Do = exports.exists = exports.elem = exports.toError = exports.FromEither = exports.MonadThrow = exports.ChainRec = exports.Extend = exports.Alt = exports.Bifunctor = exports.Traversable = exports.Foldable = exports.chainFirstW = exports.chainFirst = exports.Monad = exports.Chain = exports.Applicative = exports.apSecond = exports.apFirst = exports.Apply = exports.Pointed = exports.flap = exports.Functor = exports.getAltValidation = exports.getApplicativeValidation = exports.getWitherable = void 0;
-var Applicative_1 = __webpack_require__(767);
-var Apply_1 = __webpack_require__(370);
-var Chain_1 = __webpack_require__(580);
-var ChainRec_1 = __webpack_require__(99);
-var function_1 = __webpack_require__(231);
-var Functor_1 = __webpack_require__(943);
-var _ = __importStar(__webpack_require__(881));
-var Separated_1 = __webpack_require__(5);
+var Applicative_1 = __nccwpck_require__(766);
+var Apply_1 = __nccwpck_require__(205);
+var Chain_1 = __nccwpck_require__(372);
+var ChainRec_1 = __nccwpck_require__(322);
+var function_1 = __nccwpck_require__(716);
+var Functor_1 = __nccwpck_require__(533);
+var _ = __importStar(__nccwpck_require__(840));
+var Separated_1 = __nccwpck_require__(877);
 // -------------------------------------------------------------------------------------
 // guards
 // -------------------------------------------------------------------------------------
@@ -1977,10 +1903,617 @@ exports.getValidation = getValidation;
 
 /***/ }),
 
-/***/ 338:
-/***/ (function(__unusedmodule, exports, __webpack_require__) {
+/***/ 533:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
-"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getFunctorComposition = exports.bindTo = exports.flap = exports.map = void 0;
+/**
+ * A `Functor` is a type constructor which supports a mapping operation `map`.
+ *
+ * `map` can be used to turn functions `a -> b` into functions `f a -> f b` whose argument and return types use the type
+ * constructor `f` to represent some computational context.
+ *
+ * Instances must satisfy the following laws:
+ *
+ * 1. Identity: `F.map(fa, a => a) <-> fa`
+ * 2. Composition: `F.map(fa, a => bc(ab(a))) <-> F.map(F.map(fa, ab), bc)`
+ *
+ * @since 2.0.0
+ */
+var function_1 = __nccwpck_require__(716);
+function map(F, G) {
+    return function (f) { return function (fa) { return F.map(fa, function (ga) { return G.map(ga, f); }); }; };
+}
+exports.map = map;
+function flap(F) {
+    return function (a) { return function (fab) { return F.map(fab, function (f) { return f(a); }); }; };
+}
+exports.flap = flap;
+function bindTo(F) {
+    return function (name) { return function (fa) { return F.map(fa, function (a) {
+        var _a;
+        return (_a = {}, _a[name] = a, _a);
+    }); }; };
+}
+exports.bindTo = bindTo;
+/** @deprecated */
+function getFunctorComposition(F, G) {
+    var _map = map(F, G);
+    return {
+        map: function (fga, f) { return function_1.pipe(fga, _map(f)); }
+    };
+}
+exports.getFunctorComposition = getFunctorComposition;
+
+
+/***/ }),
+
+/***/ 877:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+
+/**
+ * ```ts
+ * interface Separated<E, A> {
+ *    readonly left: E
+ *    readonly right: A
+ * }
+ * ```
+ *
+ * Represents a result of separating a whole into two parts.
+ *
+ * @since 2.10.0
+ */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.right = exports.left = exports.flap = exports.Functor = exports.Bifunctor = exports.URI = exports.bimap = exports.mapLeft = exports.map = exports.separated = void 0;
+var function_1 = __nccwpck_require__(716);
+var Functor_1 = __nccwpck_require__(533);
+// -------------------------------------------------------------------------------------
+// constructors
+// -------------------------------------------------------------------------------------
+/**
+ * @category constructors
+ * @since 2.10.0
+ */
+var separated = function (left, right) { return ({ left: left, right: right }); };
+exports.separated = separated;
+// -------------------------------------------------------------------------------------
+// non-pipeables
+// -------------------------------------------------------------------------------------
+var _map = function (fa, f) { return function_1.pipe(fa, exports.map(f)); };
+var _mapLeft = function (fa, f) { return function_1.pipe(fa, exports.mapLeft(f)); };
+var _bimap = function (fa, g, f) { return function_1.pipe(fa, exports.bimap(g, f)); };
+// -------------------------------------------------------------------------------------
+// type class members
+// -------------------------------------------------------------------------------------
+/**
+ * `map` can be used to turn functions `(a: A) => B` into functions `(fa: F<A>) => F<B>` whose argument and return types
+ * use the type constructor `F` to represent some computational context.
+ *
+ * @category Functor
+ * @since 2.10.0
+ */
+var map = function (f) { return function (fa) {
+    return exports.separated(exports.left(fa), f(exports.right(fa)));
+}; };
+exports.map = map;
+/**
+ * Map a function over the first type argument of a bifunctor.
+ *
+ * @category Bifunctor
+ * @since 2.10.0
+ */
+var mapLeft = function (f) { return function (fa) {
+    return exports.separated(f(exports.left(fa)), exports.right(fa));
+}; };
+exports.mapLeft = mapLeft;
+/**
+ * Map a pair of functions over the two type arguments of the bifunctor.
+ *
+ * @category Bifunctor
+ * @since 2.10.0
+ */
+var bimap = function (f, g) { return function (fa) {
+    return exports.separated(f(exports.left(fa)), g(exports.right(fa)));
+}; };
+exports.bimap = bimap;
+// -------------------------------------------------------------------------------------
+// instances
+// -------------------------------------------------------------------------------------
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.URI = 'Separated';
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.Bifunctor = {
+    URI: exports.URI,
+    mapLeft: _mapLeft,
+    bimap: _bimap
+};
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+exports.Functor = {
+    URI: exports.URI,
+    map: _map
+};
+/**
+ * Derivable from `Functor`.
+ *
+ * @category combinators
+ * @since 2.10.0
+ */
+exports.flap = 
+/*#_PURE_*/
+Functor_1.flap(exports.Functor);
+// -------------------------------------------------------------------------------------
+// utils
+// -------------------------------------------------------------------------------------
+/**
+ * @since 2.10.0
+ */
+var left = function (s) { return s.left; };
+exports.left = left;
+/**
+ * @since 2.10.0
+ */
+var right = function (s) { return s.right; };
+exports.right = right;
+
+
+/***/ }),
+
+/***/ 716:
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.hole = exports.pipe = exports.untupled = exports.tupled = exports.absurd = exports.decrement = exports.increment = exports.tuple = exports.flow = exports.flip = exports.constVoid = exports.constUndefined = exports.constNull = exports.constFalse = exports.constTrue = exports.constant = exports.not = exports.unsafeCoerce = exports.identity = exports.getEndomorphismMonoid = exports.getRing = exports.getSemiring = exports.getMonoid = exports.getSemigroup = exports.getBooleanAlgebra = void 0;
+// -------------------------------------------------------------------------------------
+// instances
+// -------------------------------------------------------------------------------------
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+var getBooleanAlgebra = function (B) { return function () { return ({
+    meet: function (x, y) { return function (a) { return B.meet(x(a), y(a)); }; },
+    join: function (x, y) { return function (a) { return B.join(x(a), y(a)); }; },
+    zero: function () { return B.zero; },
+    one: function () { return B.one; },
+    implies: function (x, y) { return function (a) { return B.implies(x(a), y(a)); }; },
+    not: function (x) { return function (a) { return B.not(x(a)); }; }
+}); }; };
+exports.getBooleanAlgebra = getBooleanAlgebra;
+/**
+ * Unary functions form a semigroup as long as you can provide a semigroup for the codomain.
+ *
+ * @example
+ * import { Predicate, getSemigroup } from 'fp-ts/function'
+ * import * as B from 'fp-ts/boolean'
+ *
+ * const f: Predicate<number> = (n) => n <= 2
+ * const g: Predicate<number> = (n) => n >= 0
+ *
+ * const S1 = getSemigroup(B.SemigroupAll)<number>()
+ *
+ * assert.deepStrictEqual(S1.concat(f, g)(1), true)
+ * assert.deepStrictEqual(S1.concat(f, g)(3), false)
+ *
+ * const S2 = getSemigroup(B.SemigroupAny)<number>()
+ *
+ * assert.deepStrictEqual(S2.concat(f, g)(1), true)
+ * assert.deepStrictEqual(S2.concat(f, g)(3), true)
+ *
+ * @category instances
+ * @since 2.10.0
+ */
+var getSemigroup = function (S) { return function () { return ({
+    concat: function (f, g) { return function (a) { return S.concat(f(a), g(a)); }; }
+}); }; };
+exports.getSemigroup = getSemigroup;
+/**
+ * Unary functions form a monoid as long as you can provide a monoid for the codomain.
+ *
+ * @example
+ * import { Predicate, getMonoid } from 'fp-ts/function'
+ * import * as B from 'fp-ts/boolean'
+ *
+ * const f: Predicate<number> = (n) => n <= 2
+ * const g: Predicate<number> = (n) => n >= 0
+ *
+ * const M1 = getMonoid(B.MonoidAll)<number>()
+ *
+ * assert.deepStrictEqual(M1.concat(f, g)(1), true)
+ * assert.deepStrictEqual(M1.concat(f, g)(3), false)
+ *
+ * const M2 = getMonoid(B.MonoidAny)<number>()
+ *
+ * assert.deepStrictEqual(M2.concat(f, g)(1), true)
+ * assert.deepStrictEqual(M2.concat(f, g)(3), true)
+ *
+ * @category instances
+ * @since 2.10.0
+ */
+var getMonoid = function (M) {
+    var getSemigroupM = exports.getSemigroup(M);
+    return function () { return ({
+        concat: getSemigroupM().concat,
+        empty: function () { return M.empty; }
+    }); };
+};
+exports.getMonoid = getMonoid;
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+var getSemiring = function (S) { return ({
+    add: function (f, g) { return function (x) { return S.add(f(x), g(x)); }; },
+    zero: function () { return S.zero; },
+    mul: function (f, g) { return function (x) { return S.mul(f(x), g(x)); }; },
+    one: function () { return S.one; }
+}); };
+exports.getSemiring = getSemiring;
+/**
+ * @category instances
+ * @since 2.10.0
+ */
+var getRing = function (R) {
+    var S = exports.getSemiring(R);
+    return {
+        add: S.add,
+        mul: S.mul,
+        one: S.one,
+        zero: S.zero,
+        sub: function (f, g) { return function (x) { return R.sub(f(x), g(x)); }; }
+    };
+};
+exports.getRing = getRing;
+/**
+ * Endomorphism form a monoid where the `empty` value is the identity function.
+ *
+ * @category instances
+ * @since 2.10.0
+ */
+var getEndomorphismMonoid = function () { return ({
+    concat: function (x, y) { return function (a) { return y(x(a)); }; },
+    empty: identity
+}); };
+exports.getEndomorphismMonoid = getEndomorphismMonoid;
+/**
+ * @since 2.0.0
+ */
+function identity(a) {
+    return a;
+}
+exports.identity = identity;
+/**
+ * @since 2.0.0
+ */
+exports.unsafeCoerce = identity;
+/**
+ * @since 2.0.0
+ */
+function not(predicate) {
+    return function (a) { return !predicate(a); };
+}
+exports.not = not;
+/**
+ * @since 2.0.0
+ */
+function constant(a) {
+    return function () { return a; };
+}
+exports.constant = constant;
+/**
+ * A thunk that returns always `true`.
+ *
+ * @since 2.0.0
+ */
+exports.constTrue = 
+/*#__PURE__*/
+constant(true);
+/**
+ * A thunk that returns always `false`.
+ *
+ * @since 2.0.0
+ */
+exports.constFalse = 
+/*#__PURE__*/
+constant(false);
+/**
+ * A thunk that returns always `null`.
+ *
+ * @since 2.0.0
+ */
+exports.constNull = 
+/*#__PURE__*/
+constant(null);
+/**
+ * A thunk that returns always `undefined`.
+ *
+ * @since 2.0.0
+ */
+exports.constUndefined = 
+/*#__PURE__*/
+constant(undefined);
+/**
+ * A thunk that returns always `void`.
+ *
+ * @since 2.0.0
+ */
+exports.constVoid = exports.constUndefined;
+/**
+ * Flips the order of the arguments of a function of two arguments.
+ *
+ * @since 2.0.0
+ */
+function flip(f) {
+    return function (b, a) { return f(a, b); };
+}
+exports.flip = flip;
+function flow(ab, bc, cd, de, ef, fg, gh, hi, ij) {
+    switch (arguments.length) {
+        case 1:
+            return ab;
+        case 2:
+            return function () {
+                return bc(ab.apply(this, arguments));
+            };
+        case 3:
+            return function () {
+                return cd(bc(ab.apply(this, arguments)));
+            };
+        case 4:
+            return function () {
+                return de(cd(bc(ab.apply(this, arguments))));
+            };
+        case 5:
+            return function () {
+                return ef(de(cd(bc(ab.apply(this, arguments)))));
+            };
+        case 6:
+            return function () {
+                return fg(ef(de(cd(bc(ab.apply(this, arguments))))));
+            };
+        case 7:
+            return function () {
+                return gh(fg(ef(de(cd(bc(ab.apply(this, arguments)))))));
+            };
+        case 8:
+            return function () {
+                return hi(gh(fg(ef(de(cd(bc(ab.apply(this, arguments))))))));
+            };
+        case 9:
+            return function () {
+                return ij(hi(gh(fg(ef(de(cd(bc(ab.apply(this, arguments)))))))));
+            };
+    }
+    return;
+}
+exports.flow = flow;
+/**
+ * @since 2.0.0
+ */
+function tuple() {
+    var t = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        t[_i] = arguments[_i];
+    }
+    return t;
+}
+exports.tuple = tuple;
+/**
+ * @since 2.0.0
+ */
+function increment(n) {
+    return n + 1;
+}
+exports.increment = increment;
+/**
+ * @since 2.0.0
+ */
+function decrement(n) {
+    return n - 1;
+}
+exports.decrement = decrement;
+/**
+ * @since 2.0.0
+ */
+function absurd(_) {
+    throw new Error('Called `absurd` function which should be uncallable');
+}
+exports.absurd = absurd;
+/**
+ * Creates a tupled version of this function: instead of `n` arguments, it accepts a single tuple argument.
+ *
+ * @example
+ * import { tupled } from 'fp-ts/function'
+ *
+ * const add = tupled((x: number, y: number): number => x + y)
+ *
+ * assert.strictEqual(add([1, 2]), 3)
+ *
+ * @since 2.4.0
+ */
+function tupled(f) {
+    return function (a) { return f.apply(void 0, a); };
+}
+exports.tupled = tupled;
+/**
+ * Inverse function of `tupled`
+ *
+ * @since 2.4.0
+ */
+function untupled(f) {
+    return function () {
+        var a = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            a[_i] = arguments[_i];
+        }
+        return f(a);
+    };
+}
+exports.untupled = untupled;
+function pipe(a, ab, bc, cd, de, ef, fg, gh, hi, ij, jk, kl, lm, mn, no, op, pq, qr, rs, st) {
+    switch (arguments.length) {
+        case 1:
+            return a;
+        case 2:
+            return ab(a);
+        case 3:
+            return bc(ab(a));
+        case 4:
+            return cd(bc(ab(a)));
+        case 5:
+            return de(cd(bc(ab(a))));
+        case 6:
+            return ef(de(cd(bc(ab(a)))));
+        case 7:
+            return fg(ef(de(cd(bc(ab(a))))));
+        case 8:
+            return gh(fg(ef(de(cd(bc(ab(a)))))));
+        case 9:
+            return hi(gh(fg(ef(de(cd(bc(ab(a))))))));
+        case 10:
+            return ij(hi(gh(fg(ef(de(cd(bc(ab(a)))))))));
+        case 11:
+            return jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a))))))))));
+        case 12:
+            return kl(jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a)))))))))));
+        case 13:
+            return lm(kl(jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a))))))))))));
+        case 14:
+            return mn(lm(kl(jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a)))))))))))));
+        case 15:
+            return no(mn(lm(kl(jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a))))))))))))));
+        case 16:
+            return op(no(mn(lm(kl(jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a)))))))))))))));
+        case 17:
+            return pq(op(no(mn(lm(kl(jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a))))))))))))))));
+        case 18:
+            return qr(pq(op(no(mn(lm(kl(jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a)))))))))))))))));
+        case 19:
+            return rs(qr(pq(op(no(mn(lm(kl(jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a))))))))))))))))));
+        case 20:
+            return st(rs(qr(pq(op(no(mn(lm(kl(jk(ij(hi(gh(fg(ef(de(cd(bc(ab(a)))))))))))))))))));
+    }
+    return;
+}
+exports.pipe = pipe;
+/**
+ * Type hole simulation
+ *
+ * @since 2.7.0
+ */
+exports.hole = absurd;
+
+
+/***/ }),
+
+/***/ 840:
+/***/ (function(__unused_webpack_module, exports) {
+
+
+var __spreadArray = (this && this.__spreadArray) || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+        to[j] = from[i];
+    return to;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.fromReadonlyNonEmptyArray = exports.has = exports.isLeft = exports.isSome = void 0;
+// -------------------------------------------------------------------------------------
+// Option
+// -------------------------------------------------------------------------------------
+/** @internal */
+var isSome = function (fa) { return fa._tag === 'Some'; };
+exports.isSome = isSome;
+// -------------------------------------------------------------------------------------
+// Either
+// -------------------------------------------------------------------------------------
+/** @internal */
+var isLeft = function (ma) { return ma._tag === 'Left'; };
+exports.isLeft = isLeft;
+// -------------------------------------------------------------------------------------
+// Record
+// -------------------------------------------------------------------------------------
+/** @internal */
+exports.has = Object.prototype.hasOwnProperty;
+// -------------------------------------------------------------------------------------
+// NonEmptyArray
+// -------------------------------------------------------------------------------------
+/** @internal */
+var fromReadonlyNonEmptyArray = function (as) { return __spreadArray([as[0]], as.slice(1)); };
+exports.fromReadonlyNonEmptyArray = fromReadonlyNonEmptyArray;
+
+
+/***/ }),
+
+/***/ 985:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PathReporter = exports.success = exports.failure = void 0;
+var _1 = __nccwpck_require__(428);
+var Either_1 = __nccwpck_require__(534);
+function stringify(v) {
+    if (typeof v === 'function') {
+        return _1.getFunctionName(v);
+    }
+    if (typeof v === 'number' && !isFinite(v)) {
+        if (isNaN(v)) {
+            return 'NaN';
+        }
+        return v > 0 ? 'Infinity' : '-Infinity';
+    }
+    return JSON.stringify(v);
+}
+function getContextPath(context) {
+    return context.map(function (_a) {
+        var key = _a.key, type = _a.type;
+        return key + ": " + type.name;
+    }).join('/');
+}
+function getMessage(e) {
+    return e.message !== undefined
+        ? e.message
+        : "Invalid value " + stringify(e.value) + " supplied to " + getContextPath(e.context);
+}
+/**
+ * @since 1.0.0
+ */
+function failure(es) {
+    return es.map(getMessage);
+}
+exports.failure = failure;
+/**
+ * @since 1.0.0
+ */
+function success() {
+    return ['No errors!'];
+}
+exports.success = success;
+/**
+ * @since 1.0.0
+ */
+exports.PathReporter = {
+    report: Either_1.fold(failure, success)
+};
+
+
+/***/ }),
+
+/***/ 428:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
 
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
@@ -2013,13 +2546,13 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
             r[k] = a[j];
     return r;
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.partial = exports.PartialType = exports.type = exports.InterfaceType = exports.array = exports.ArrayType = exports.recursion = exports.RecursiveType = exports.Int = exports.brand = exports.RefinementType = exports.keyof = exports.KeyofType = exports.literal = exports.LiteralType = exports.void = exports.undefined = exports.null = exports.UnknownRecord = exports.AnyDictionaryType = exports.UnknownArray = exports.AnyArrayType = exports.boolean = exports.BooleanType = exports.bigint = exports.BigIntType = exports.number = exports.NumberType = exports.string = exports.StringType = exports.unknown = exports.UnknownType = exports.voidType = exports.VoidType = exports.UndefinedType = exports.nullType = exports.NullType = exports.getIndex = exports.getTags = exports.emptyTags = exports.mergeAll = exports.getDomainKeys = exports.appendContext = exports.getContextEntry = exports.getFunctionName = exports.identity = exports.Type = exports.success = exports.failure = exports.failures = void 0;
-exports.alias = exports.clean = exports.StrictType = exports.dictionary = exports.Integer = exports.refinement = exports.object = exports.ObjectType = exports.Dictionary = exports.any = exports.AnyType = exports.never = exports.NeverType = exports.getDefaultContext = exports.getValidationError = exports.interface = exports.Array = exports.taggedUnion = exports.TaggedUnionType = exports.Function = exports.FunctionType = exports.exact = exports.ExactType = exports.strict = exports.readonlyArray = exports.ReadonlyArrayType = exports.readonly = exports.ReadonlyType = exports.tuple = exports.TupleType = exports.intersection = exports.IntersectionType = exports.union = exports.UnionType = exports.record = exports.DictionaryType = void 0;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.partial = exports.PartialType = exports.type = exports.InterfaceType = exports.array = exports.ArrayType = exports.recursion = exports.RecursiveType = exports.Int = exports.brand = exports.RefinementType = exports.keyof = exports.KeyofType = exports.literal = exports.LiteralType = exports["void"] = exports.undefined = exports["null"] = exports.UnknownRecord = exports.AnyDictionaryType = exports.UnknownArray = exports.AnyArrayType = exports.boolean = exports.BooleanType = exports.bigint = exports.BigIntType = exports.number = exports.NumberType = exports.string = exports.StringType = exports.unknown = exports.UnknownType = exports.voidType = exports.VoidType = exports.UndefinedType = exports.nullType = exports.NullType = exports.getIndex = exports.getTags = exports.emptyTags = exports.mergeAll = exports.getDomainKeys = exports.appendContext = exports.getContextEntry = exports.getFunctionName = exports.identity = exports.Type = exports.success = exports.failure = exports.failures = void 0;
+exports.alias = exports.clean = exports.StrictType = exports.dictionary = exports.Integer = exports.refinement = exports.object = exports.ObjectType = exports.Dictionary = exports.any = exports.AnyType = exports.never = exports.NeverType = exports.getDefaultContext = exports.getValidationError = exports["interface"] = exports.Array = exports.taggedUnion = exports.TaggedUnionType = exports.Function = exports.FunctionType = exports.exact = exports.ExactType = exports.strict = exports.readonlyArray = exports.ReadonlyArrayType = exports.readonly = exports.ReadonlyType = exports.tuple = exports.TupleType = exports.intersection = exports.IntersectionType = exports.union = exports.UnionType = exports.record = exports.DictionaryType = void 0;
 /**
  * @since 1.0.0
  */
-var Either_1 = __webpack_require__(311);
+var Either_1 = __nccwpck_require__(534);
 /**
  * @category Decode error
  * @since 1.0.0
@@ -2544,7 +3077,7 @@ exports.NullType = NullType;
  * @since 1.0.0
  */
 exports.nullType = new NullType();
-exports.null = exports.nullType;
+exports["null"] = exports.nullType;
 /**
  * @since 1.0.0
  */
@@ -2584,7 +3117,7 @@ exports.VoidType = VoidType;
  * @since 1.2.0
  */
 exports.voidType = new VoidType();
-exports.void = exports.voidType;
+exports["void"] = exports.voidType;
 /**
  * @since 1.5.0
  */
@@ -3005,7 +3538,7 @@ function type(props, name) {
         }, props);
 }
 exports.type = type;
-exports.interface = type;
+exports["interface"] = type;
 /**
  * @since 1.0.0
  */
@@ -3664,523 +4197,31 @@ exports.alias = alias;
 
 /***/ }),
 
-/***/ 370:
-/***/ (function(__unusedmodule, exports, __webpack_require__) {
+/***/ 764:
+/***/ ((__unused_webpack_module, exports) => {
 
-"use strict";
 
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.sequenceS = exports.sequenceT = exports.getApplySemigroup = exports.apS = exports.apSecond = exports.apFirst = exports.ap = void 0;
-var function_1 = __webpack_require__(231);
-function ap(F, G) {
-    return function (fa) { return function (fab) {
-        return F.ap(F.map(fab, function (gab) { return function (ga) { return G.ap(gab, ga); }; }), fa);
-    }; };
-}
-exports.ap = ap;
-function apFirst(A) {
-    return function (second) { return function (first) {
-        return A.ap(A.map(first, function (a) { return function () { return a; }; }), second);
-    }; };
-}
-exports.apFirst = apFirst;
-function apSecond(A) {
-    return function (second) { return function (first) {
-        return A.ap(A.map(first, function () { return function (b) { return b; }; }), second);
-    }; };
-}
-exports.apSecond = apSecond;
-function apS(F) {
-    return function (name, fb) { return function (fa) {
-        return F.ap(F.map(fa, function (a) { return function (b) {
-            var _a;
-            return Object.assign({}, a, (_a = {}, _a[name] = b, _a));
-        }; }), fb);
-    }; };
-}
-exports.apS = apS;
-function getApplySemigroup(F) {
-    return function (S) { return ({
-        concat: function (first, second) {
-            return F.ap(F.map(first, function (x) { return function (y) { return S.concat(x, y); }; }), second);
-        }
-    }); };
-}
-exports.getApplySemigroup = getApplySemigroup;
-function curried(f, n, acc) {
-    return function (x) {
-        var combined = Array(acc.length + 1);
-        for (var i = 0; i < acc.length; i++) {
-            combined[i] = acc[i];
-        }
-        combined[acc.length] = x;
-        return n === 0 ? f.apply(null, combined) : curried(f, n - 1, combined);
-    };
-}
-var tupleConstructors = {
-    1: function (a) { return [a]; },
-    2: function (a) { return function (b) { return [a, b]; }; },
-    3: function (a) { return function (b) { return function (c) { return [a, b, c]; }; }; },
-    4: function (a) { return function (b) { return function (c) { return function (d) { return [a, b, c, d]; }; }; }; },
-    5: function (a) { return function (b) { return function (c) { return function (d) { return function (e) { return [a, b, c, d, e]; }; }; }; }; }
-};
-function getTupleConstructor(len) {
-    if (!tupleConstructors.hasOwnProperty(len)) {
-        tupleConstructors[len] = curried(function_1.tuple, len - 1, []);
-    }
-    return tupleConstructors[len];
-}
-function sequenceT(F) {
-    return function () {
-        var args = [];
-        for (var _i = 0; _i < arguments.length; _i++) {
-            args[_i] = arguments[_i];
-        }
-        var len = args.length;
-        var f = getTupleConstructor(len);
-        var fas = F.map(args[0], f);
-        for (var i = 1; i < len; i++) {
-            fas = F.ap(fas, args[i]);
-        }
-        return fas;
-    };
-}
-exports.sequenceT = sequenceT;
-function getRecordConstructor(keys) {
-    var len = keys.length;
-    switch (len) {
-        case 1:
-            return function (a) {
-                var _a;
-                return (_a = {}, _a[keys[0]] = a, _a);
-            };
-        case 2:
-            return function (a) { return function (b) {
-                var _a;
-                return (_a = {}, _a[keys[0]] = a, _a[keys[1]] = b, _a);
-            }; };
-        case 3:
-            return function (a) { return function (b) { return function (c) {
-                var _a;
-                return (_a = {}, _a[keys[0]] = a, _a[keys[1]] = b, _a[keys[2]] = c, _a);
-            }; }; };
-        case 4:
-            return function (a) { return function (b) { return function (c) { return function (d) {
-                var _a;
-                return (_a = {},
-                    _a[keys[0]] = a,
-                    _a[keys[1]] = b,
-                    _a[keys[2]] = c,
-                    _a[keys[3]] = d,
-                    _a);
-            }; }; }; };
-        case 5:
-            return function (a) { return function (b) { return function (c) { return function (d) { return function (e) {
-                var _a;
-                return (_a = {},
-                    _a[keys[0]] = a,
-                    _a[keys[1]] = b,
-                    _a[keys[2]] = c,
-                    _a[keys[3]] = d,
-                    _a[keys[4]] = e,
-                    _a);
-            }; }; }; }; };
-        default:
-            return curried(function () {
-                var args = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    args[_i] = arguments[_i];
-                }
-                var r = {};
-                for (var i = 0; i < len; i++) {
-                    r[keys[i]] = args[i];
-                }
-                return r;
-            }, len - 1, []);
-    }
-}
-function sequenceS(F) {
-    return function (r) {
-        var keys = Object.keys(r);
-        var len = keys.length;
-        var f = getRecordConstructor(keys);
-        var fr = F.map(r[keys[0]], f);
-        for (var i = 1; i < len; i++) {
-            fr = F.ap(fr, r[keys[i]]);
-        }
-        return fr;
-    };
-}
-exports.sequenceS = sequenceS;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.metrics = void 0;
+exports.metrics = [
+    "drift",
+    "pulse",
+    "releases",
+    "major",
+    "minor",
+    "patch",
+];
 
 
 /***/ }),
 
-/***/ 569:
-/***/ (function(__unusedmodule, exports, __webpack_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.getResultsTable = exports.runLibyear = exports.setLibyearPath = exports.getTotals = exports.metrics = void 0;
-var child_process = __importStar(__webpack_require__(129));
-var constants_1 = __webpack_require__(286);
-Object.defineProperty(exports, "metrics", { enumerable: true, get: function () { return constants_1.metrics; } });
-var validate_1 = __webpack_require__(697);
-Object.defineProperty(exports, "getTotals", { enumerable: true, get: function () { return validate_1.getTotals; } });
-var path = __importStar(__webpack_require__(622));
-var util_1 = __webpack_require__(669);
-var exec = util_1.promisify(child_process.exec);
-var libyearPath = null;
-/**
- * Used for testing to overwrite the path to point to node_modules
- */
-var setLibyearPath = function (path) {
-    libyearPath = path;
-};
-exports.setLibyearPath = setLibyearPath;
-/**
- * Dynamically get the path to the libyear module
- *
- * (supporting both live (built) and test environments)
- */
-var getLibyearModulePath = function () {
-    /* istanbul ignore else */
-    if (libyearPath) {
-        return libyearPath;
-    }
-    else {
-        /**
-         * When run on GitHub, the compiles libyear module is in the file
-         * ../libyear/index.js relative to the action module in dist/main/index.js
-         */
-        return path.join(path.dirname(__dirname), 'libyear');
-    }
-};
-var runLibyear = function (directory) { return __awaiter(void 0, void 0, void 0, function () {
-    var path, result, report;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                path = getLibyearModulePath();
-                return [4 /*yield*/, exec("node \"" + path + "\" --json", {
-                        cwd: directory,
-                    })];
-            case 1:
-                result = _a.sent();
-                report = JSON.parse(result.stdout);
-                return [2 /*return*/, report];
-        }
-    });
-}); };
-exports.runLibyear = runLibyear;
-var getResultsTable = function (report) {
-    return report.map(function (_a) {
-        var dependency = _a.dependency, drift = _a.drift, pulse = _a.pulse, releases = _a.releases, major = _a.major, minor = _a.minor, patch = _a.patch, available = _a.available;
-        return ({
-            dependency: dependency,
-            drift: (drift === null || drift === void 0 ? void 0 : drift.toFixed(2)) || drift,
-            pulse: (pulse === null || pulse === void 0 ? void 0 : pulse.toFixed(2)) || pulse,
-            releases: releases,
-            major: major,
-            minor: minor,
-            patch: patch,
-            available: available,
-        });
-    });
-};
-exports.getResultsTable = getResultsTable;
+/***/ 190:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 
-/***/ }),
-
-/***/ 580:
-/***/ (function(__unusedmodule, exports) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.bind = exports.chainFirst = void 0;
-function chainFirst(M) {
-    return function (f) { return function (first) { return M.chain(first, function (a) { return M.map(f(a), function () { return a; }); }); }; };
-}
-exports.chainFirst = chainFirst;
-function bind(M) {
-    return function (name, f) { return function (ma) { return M.chain(ma, function (a) { return M.map(f(a), function (b) {
-        var _a;
-        return Object.assign({}, a, (_a = {}, _a[name] = b, _a));
-    }); }); }; };
-}
-exports.bind = bind;
-
-
-/***/ }),
-
-/***/ 593:
-/***/ (function(__unusedmodule, exports, __webpack_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.main = exports.runAction = void 0;
-var PathReporter_1 = __webpack_require__(306);
-var Either_1 = __webpack_require__(311);
-var fs_1 = __webpack_require__(747);
-var path = __importStar(__webpack_require__(622));
-var environment_1 = __webpack_require__(626);
-var libyear_1 = __webpack_require__(569);
-var runAction = function (_a) {
-    var env = _a.env, log = _a.log, cwd = _a.cwd;
-    return __awaiter(void 0, void 0, void 0, function () {
-        var json, error, dir, report, totals, _i, metrics_1, metric, val, output;
-        return __generator(this, function (_b) {
-            switch (_b.label) {
-                case 0: return [4 /*yield*/, fs_1.promises.readFile(env.GITHUB_EVENT_PATH)];
-                case 1:
-                    json = _b.sent();
-                    error = function (msg) {
-                        log.error("::error ::" + msg);
-                        return new Error(msg);
-                    };
-                    if (!(env.GITHUB_EVENT_NAME === 'push' ||
-                        env.GITHUB_EVENT_NAME === 'schedule')) return [3 /*break*/, 3];
-                    dir = env.FOLDER ? path.join(cwd, env.FOLDER) : cwd;
-                    return [4 /*yield*/, libyear_1.runLibyear(dir)];
-                case 2:
-                    report = _b.sent();
-                    log.log('Result: ');
-                    log.table(libyear_1.getResultsTable(report));
-                    // calculate totals
-                    log.log('Totals: ');
-                    totals = libyear_1.getTotals(report);
-                    for (_i = 0, metrics_1 = libyear_1.metrics; _i < metrics_1.length; _i++) {
-                        metric = metrics_1[_i];
-                        val = totals.get(metric);
-                        log.log(metric + ": " + val);
-                        output = metric === 'drift' || metric === 'pulse' ? Number(val).toFixed(2) : val;
-                        log.log("::set-output name=" + metric + "::" + output);
-                    }
-                    return [3 /*break*/, 4];
-                case 3:
-                    if (env.GITHUB_EVENT_NAME === 'pull_request') {
-                        throw new Error('TODO');
-                    }
-                    else {
-                        throw error("Unsupported GitHub event: " + env.GITHUB_EVENT_NAME);
-                    }
-                    _b.label = 4;
-                case 4: return [2 /*return*/];
-            }
-        });
-    });
-};
-exports.runAction = runAction;
-var main = function (_a) {
-    var env = _a.env, log = _a.log, cwd = _a.cwd;
-    return __awaiter(void 0, void 0, void 0, function () {
-        var validate, errors, _i, errors_1, error;
-        return __generator(this, function (_b) {
-            validate = environment_1.ENVIRONMENT.decode(env);
-            if (Either_1.isRight(validate)) {
-                return [2 /*return*/, exports.runAction({
-                        env: validate.right,
-                        log: log,
-                        cwd: cwd,
-                    })];
-            }
-            else {
-                errors = PathReporter_1.PathReporter.report(validate);
-                for (_i = 0, errors_1 = errors; _i < errors_1.length; _i++) {
-                    error = errors_1[_i];
-                    log.error(error);
-                }
-                throw new Error('Invalid config, unable to continue');
-            }
-            return [2 /*return*/];
-        });
-    });
-};
-exports.main = main;
-
-
-/***/ }),
-
-/***/ 622:
-/***/ (function(module) {
-
-module.exports = require("path");
-
-/***/ }),
-
-/***/ 626:
-/***/ (function(__unusedmodule, exports, __webpack_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ENVIRONMENT = void 0;
-var t = __importStar(__webpack_require__(338));
-exports.ENVIRONMENT = t.intersection([
-    t.type({
-        /** Implicit environment variable passed by GitHub */
-        GITHUB_EVENT_PATH: t.string,
-        GITHUB_EVENT_NAME: t.string,
-    }),
-    t.partial({
-        /**
-         * Folder within the repository to run libyear on
-         */
-        FOLDER: t.string,
-    }),
-]);
-
-
-/***/ }),
-
-/***/ 669:
-/***/ (function(module) {
-
-module.exports = require("util");
-
-/***/ }),
-
-/***/ 697:
-/***/ (function(__unusedmodule, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
+Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getViolations = exports.getTotals = void 0;
-const constants_1 = __webpack_require__(286);
+const constants_1 = __nccwpck_require__(764);
 const isExcused = (dependency, overrides) => Object.entries(overrides).some(([pattern, { defer }]) => RegExp(pattern).test(dependency) && Date.now() < Date.parse(defer));
 const isBreach = (value, limit, dependency, overrides) => limit != null && value > limit && !isExcused(dependency, overrides !== null && overrides !== void 0 ? overrides : {});
 const getMatchingPattern = (dependency, overrides) => Object.keys(overrides).find((pattern) => RegExp(pattern).test(dependency));
@@ -4188,7 +4229,7 @@ const getTotals = (dependencies) => {
     const totals = new Map();
     dependencies.forEach((dependency) => {
         constants_1.metrics.forEach((metric) => {
-            if (!isNaN(dependency[metric])) {
+            if (!Number.isNaN(dependency[metric])) {
                 const acc = totals.has(metric) ? totals.get(metric) : 0;
                 const cur = dependency[metric];
                 totals.set(metric, acc + cur);
@@ -4235,150 +4276,91 @@ exports.getViolations = getViolations;
 
 /***/ }),
 
-/***/ 747:
-/***/ (function(module) {
+/***/ 81:
+/***/ ((module) => {
+
+module.exports = require("child_process");
+
+/***/ }),
+
+/***/ 147:
+/***/ ((module) => {
 
 module.exports = require("fs");
 
 /***/ }),
 
-/***/ 767:
-/***/ (function(__unusedmodule, exports, __webpack_require__) {
+/***/ 17:
+/***/ ((module) => {
 
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.getApplicativeComposition = exports.getApplicativeMonoid = void 0;
-/**
- * The `Applicative` type class extends the `Apply` type class with a `of` function, which can be used to create values
- * of type `f a` from values of type `a`.
- *
- * Where `Apply` provides the ability to lift functions of two or more arguments to functions whose arguments are
- * wrapped using `f`, and `Functor` provides the ability to lift functions of one argument, `pure` can be seen as the
- * function which lifts functions of _zero_ arguments. That is, `Applicative` functors support a lifting operation for
- * any number of function arguments.
- *
- * Instances must satisfy the following laws in addition to the `Apply` laws:
- *
- * 1. Identity: `A.ap(A.of(a => a), fa) <-> fa`
- * 2. Homomorphism: `A.ap(A.of(ab), A.of(a)) <-> A.of(ab(a))`
- * 3. Interchange: `A.ap(fab, A.of(a)) <-> A.ap(A.of(ab => ab(a)), fab)`
- *
- * Note. `Functor`'s `map` can be derived: `A.map(x, f) = A.ap(A.of(f), x)`
- *
- * @since 2.0.0
- */
-var Apply_1 = __webpack_require__(370);
-var function_1 = __webpack_require__(231);
-var Functor_1 = __webpack_require__(943);
-function getApplicativeMonoid(F) {
-    var f = Apply_1.getApplySemigroup(F);
-    return function (M) { return ({
-        concat: f(M).concat,
-        empty: F.of(M.empty)
-    }); };
-}
-exports.getApplicativeMonoid = getApplicativeMonoid;
-/** @deprecated */
-function getApplicativeComposition(F, G) {
-    var map = Functor_1.getFunctorComposition(F, G).map;
-    var _ap = Apply_1.ap(F, G);
-    return {
-        map: map,
-        of: function (a) { return F.of(G.of(a)); },
-        ap: function (fgab, fga) { return function_1.pipe(fgab, _ap(fga)); }
-    };
-}
-exports.getApplicativeComposition = getApplicativeComposition;
-
+module.exports = require("path");
 
 /***/ }),
 
-/***/ 881:
-/***/ (function(__unusedmodule, exports) {
+/***/ 837:
+/***/ ((module) => {
 
-"use strict";
-
-var __spreadArray = (this && this.__spreadArray) || function (to, from) {
-    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-        to[j] = from[i];
-    return to;
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.fromReadonlyNonEmptyArray = exports.has = exports.isLeft = exports.isSome = void 0;
-// -------------------------------------------------------------------------------------
-// Option
-// -------------------------------------------------------------------------------------
-/** @internal */
-var isSome = function (fa) { return fa._tag === 'Some'; };
-exports.isSome = isSome;
-// -------------------------------------------------------------------------------------
-// Either
-// -------------------------------------------------------------------------------------
-/** @internal */
-var isLeft = function (ma) { return ma._tag === 'Left'; };
-exports.isLeft = isLeft;
-// -------------------------------------------------------------------------------------
-// Record
-// -------------------------------------------------------------------------------------
-/** @internal */
-exports.has = Object.prototype.hasOwnProperty;
-// -------------------------------------------------------------------------------------
-// NonEmptyArray
-// -------------------------------------------------------------------------------------
-/** @internal */
-var fromReadonlyNonEmptyArray = function (as) { return __spreadArray([as[0]], as.slice(1)); };
-exports.fromReadonlyNonEmptyArray = fromReadonlyNonEmptyArray;
-
-
-/***/ }),
-
-/***/ 943:
-/***/ (function(__unusedmodule, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.getFunctorComposition = exports.bindTo = exports.flap = exports.map = void 0;
-/**
- * A `Functor` is a type constructor which supports a mapping operation `map`.
- *
- * `map` can be used to turn functions `a -> b` into functions `f a -> f b` whose argument and return types use the type
- * constructor `f` to represent some computational context.
- *
- * Instances must satisfy the following laws:
- *
- * 1. Identity: `F.map(fa, a => a) <-> fa`
- * 2. Composition: `F.map(fa, a => bc(ab(a))) <-> F.map(F.map(fa, ab), bc)`
- *
- * @since 2.0.0
- */
-var function_1 = __webpack_require__(231);
-function map(F, G) {
-    return function (f) { return function (fa) { return F.map(fa, function (ga) { return G.map(ga, f); }); }; };
-}
-exports.map = map;
-function flap(F) {
-    return function (a) { return function (fab) { return F.map(fab, function (f) { return f(a); }); }; };
-}
-exports.flap = flap;
-function bindTo(F) {
-    return function (name) { return function (fa) { return F.map(fa, function (a) {
-        var _a;
-        return (_a = {}, _a[name] = a, _a);
-    }); }; };
-}
-exports.bindTo = bindTo;
-/** @deprecated */
-function getFunctorComposition(F, G) {
-    var _map = map(F, G);
-    return {
-        map: function (fga, f) { return function_1.pipe(fga, _map(f)); }
-    };
-}
-exports.getFunctorComposition = getFunctorComposition;
-
+module.exports = require("util");
 
 /***/ })
 
-/******/ });
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __nccwpck_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		var threw = true;
+/******/ 		try {
+/******/ 			__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nccwpck_require__);
+/******/ 			threw = false;
+/******/ 		} finally {
+/******/ 			if(threw) delete __webpack_module_cache__[moduleId];
+/******/ 		}
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/compat */
+/******/ 	
+/******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+(() => {
+var exports = __webpack_exports__;
+
+/* istanbul ignore file - this file is used purely as an entry-point */
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+var _1 = __nccwpck_require__(726);
+_1.main({
+    env: process.env,
+    log: console,
+    cwd: process.cwd(),
+}).catch(function (err) {
+    console.error(err);
+    process.exit(1);
+});
+
+})();
+
+module.exports = __webpack_exports__;
+/******/ })()
+;
