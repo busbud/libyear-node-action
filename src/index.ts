@@ -25,7 +25,8 @@ export const runAction = async ({
 
   if (
     env.GITHUB_EVENT_NAME === 'push' ||
-    env.GITHUB_EVENT_NAME === 'schedule'
+    env.GITHUB_EVENT_NAME === 'schedule' ||
+    env.GITHUB_EVENT_NAME === 'workflow_dispatch'
   ) {
     const dir = env.FOLDER ? path.join(cwd, env.FOLDER) : cwd;
     const report = await runLibyear(dir);
